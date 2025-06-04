@@ -36,9 +36,12 @@ namespace Locamobi_CRUD_Repositories.Repository
 
 
 
-        public Task Delete(int codVeiculo)
+        public async Task Delete(int codVeiculo)
         {
-            throw new NotImplementedException();
+            Connection _connection = new Connection();
+            string sql = "DELETE FROM veiculo WHERE CODVEICULO = @codVeiculo";
+            await _connection.Execute(sql, new {codVeiculo});
+
         }
 
         public Task<VeiculoEntity> GetByCodVeiculo(int codVeiculo)

@@ -1,6 +1,8 @@
 ﻿using Locamobi_CRUD_Repositories.Contracts.Repository;
+using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
+using Mysqlx.Crud;
 
 namespace MeuPrimeiroCrud
 {
@@ -27,6 +29,7 @@ namespace MeuPrimeiroCrud
                         case 'U':
                             break;
                         case 'D':
+                            await Delete();
                             break;
                         default:
                             Console.WriteLine("Error:");
@@ -46,6 +49,38 @@ namespace MeuPrimeiroCrud
 
         }
     
+
+        public async Task Create()
+        {
+            VeiculoInsertDTO veiculoInsert = new VeiculoInsertDTO();
+            
+            //colocar um autoicrement aqui pra quando inserir novo veiculo adiconar ao codido auto.
+            Console.Write("Informe o modelo: ");
+            string modelo = Console.ReadLine();
+
+            Console.Write("Informe a marca: ");
+            string marca = Console.ReadLine();
+
+            Console.Write("Informe o ano: ");
+            string ano = Console.ReadLine();
+
+            Console.Write("Informe a placa: ");
+            string placa = Console.ReadLine();
+
+            Console.Write("Informe o cor: ");
+            string cor = Console.ReadLine();
+
+            Console.Write("Informe o código da cidade: ");
+            int codigoCidade = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
+            Console.Write("Informe o tipo: | 1 Carro | 2 Motocicleta |");
+
+
+
+
+        }
+            
         static async Task Read()
         {
             IVeiculoRepository veiculoRepository = new VeiculoRepository();
@@ -66,6 +101,17 @@ namespace MeuPrimeiroCrud
             
             }
 
+        }
+
+        static async Task Delete()
+        { 
+            await Read();
+            Console.WriteLine("Informe o código do veiculo que deseja excluir:");
+            int codVe = Convert.ToInt32(Console.ReadLine());
+            IVeiculoRepository veiculoRepository = new VeiculoRepository();
+            await veiculoRepository.Delete(codVe);
+            Console.WriteLine("Veiculo excluido com sucesso!");
+        
         }
 
 
