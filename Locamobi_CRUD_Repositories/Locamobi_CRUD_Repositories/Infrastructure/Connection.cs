@@ -1,16 +1,10 @@
-﻿using Dapper;
-using MySql.Data.MySqlClient;
-
-namespace MeuPrimeiroCrud.Infrastructure
+﻿namespace Locamobi_CRUD_Repositories.Infrastructure
 {
     public class Connection
     {
-        protected string connectionString = "Server= ||| HOST ||| ;Database=locamobi;User= ||| NOME DO USER ||| ;Password= ||| SENHA ||| ;";
-
-        public MySqlConnection GetConnection()
+        public static string Get()
         {
-            return new MySqlConnection(connectionString);
+            return "Server=localhost;Database=mydb;User=root;Password=root;";
         }
-
     }
 }
