@@ -1,4 +1,9 @@
-﻿namespace MeuPrimeiroCrud
+﻿using Locamobi_CRUD_Repositories.Contracts.Repository;
+using Locamobi_CRUD_Repositories.Entity;
+using Locamobi_CRUD_Repositories.Repository;
+using MeuPrimeiroCrud.Infrastructure;
+
+namespace MeuPrimeiroCrud
 {
     public class Program
     {
@@ -7,7 +12,7 @@
             while (true)
             {
                 Console.Clear();
-                ChoseOption(Menu());
+                ChooseOption(Menu());
             }
         }
 
@@ -26,23 +31,26 @@
             return op;
         }
 
-
-        static void ChoseOption(char op)
+        static async void ChooseOption(char op)
         {
             try
             {
                 switch (op)
                 {
                     case 'C':
+                        await Create();
                         break;
 
                     case 'R':
+                        await Read();
                         break;
 
                     case 'U':
+                        await Update();
                         break;
 
                     case 'D':
+                        await Delete();
                         break;
 
                     default:
@@ -62,7 +70,6 @@
 
 
 
-
         static async Task Create()
         {
 
@@ -71,6 +78,19 @@
 
         static async Task Read()
         {
+            IContratoRepository contratoRepository = new ContratoRepository();
+            IEnumerable<ContratoEntity> contractList = await contratoRepository.GetAll();
+            foreach (ContratoEntity contract in contractList)
+            {
+                Console.WriteLine($"");
+                Console.WriteLine($"");
+            }
+
+
+             
+            
+
+
 
         }
 
