@@ -1,4 +1,8 @@
-﻿namespace MeuPrimeiroCrud
+﻿using Locamobi_CRUD_Repositories.Contracts.Repository;
+using Locamobi_CRUD_Repositories.Entity;
+using Locamobi_CRUD_Repositories.Repository;
+
+namespace MeuPrimeiroCrud
 {
     public class Program
     {
@@ -28,8 +32,9 @@
                             break;
                     }
 
-
-
+                    Console.WriteLine("Enter para continuar ");
+                    Console.ReadLine();
+                    Console.Clear();
 
                 }
             }
@@ -37,8 +42,17 @@
             {
                 Console.WriteLine($"ERRO: {ex}");
             }
-         
 
         }
+    
+        static async Task Read()
+        {
+            IVeiculoRepository veiculoRepository = new VeiculoRepository();
+            IEnumerable<VeiculoEntity> 
+
+        }
+
+
+
     }
 }
