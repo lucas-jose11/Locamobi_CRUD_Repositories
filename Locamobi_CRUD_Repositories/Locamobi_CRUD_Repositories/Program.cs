@@ -1,8 +1,11 @@
-﻿using Locamobi_CRUD_Repositories.Contracts.Repository;
+﻿using Google.Protobuf.WellKnownTypes;
+using Locamobi_CRUD_Repositories.Contracts.Repository;
 using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
 using Mysqlx.Crud;
+using Org.BouncyCastle.Asn1.Cmp;
+using ZstdSharp;
 
 namespace MeuPrimeiroCrud
 {
@@ -55,31 +58,69 @@ namespace MeuPrimeiroCrud
             VeiculoInsertDTO veiculoInsert = new VeiculoInsertDTO();
             
             //colocar um autoicrement aqui pra quando inserir novo veiculo adiconar ao codido auto.
+            //faltou CODVEICULO
             Console.Write("Informe o modelo: ");
-            string modelo = Console.ReadLine();
+            veiculoInsert.MODELO = Console.ReadLine();
 
             Console.Write("Informe a marca: ");
-            string marca = Console.ReadLine();
+            veiculoInsert.MARCA = Console.ReadLine();
 
             Console.Write("Informe o ano: ");
-            string ano = Console.ReadLine();
+            veiculoInsert.ANO = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Informe a placa: ");
-            string placa = Console.ReadLine();
+            veiculoInsert.PLACA = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Informe o cor: ");
-            string cor = Console.ReadLine();
+            veiculoInsert.COR = Console.ReadLine();
 
             Console.Write("Informe o código da cidade: ");
-            int codigoCidade = Convert.ToInt32(Console.ReadLine());
+            veiculoInsert.CIDADE_CODCID = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
+            int option = Convert.ToInt32(Console.ReadLine());
+            veiculoInsert.CLASSIFIC = DeterminatorClassific(option);
+           
             Console.Write("Informe o tipo: | 1 Carro | 2 Motocicleta |");
+            int option2 = Convert.ToInt32(Console.ReadLine());
+            veiculoInsert.TIPO = DeterminatorTipo(option2);
 
-
-
-
+            IVeiculoRepository veiculoRepository = new VeiculoRepository();
+            await veiculoRepository.Insert(veiculoInsert);
+            Console.WriteLine("Veiculo cadastrado com sucesso");
         }
+
+         static string DeterminatorClassific(int option)
+         {
+
+            if (option == 1)
+                return "economico";
+
+            else if (option == 2)
+                return "intermediario";
+
+
+            else if (option == 3)
+                return "premium";
+
+            else
+                throw new ArgumentException($"Classificação não encontrada{option}"); 
+   
+         }
+
+        static string DeterminatorTipo(int option2)
+        {
+            if (option2 == 1)
+                return "carro";
+
+            else if (option2 == 2)
+                return "motocicleta";
+
+            else
+                throw new ArgumentException($"Tipo não encontrada{option2}");
+        }
+
+
             
         static async Task Read()
         {
