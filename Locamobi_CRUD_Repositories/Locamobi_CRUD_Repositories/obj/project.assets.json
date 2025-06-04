@@ -1796,23 +1796,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucas.silva79\\.nuget\\packages\\": {},
+    "C:\\Users\\victor.rocha3\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas.silva79\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
+      "projectUniqueName": "C:\\Users\\victor.rocha3\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
       "projectName": "Locamobi_CRUD_Repositories",
-      "projectPath": "C:\\Users\\lucas.silva79\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
-      "packagesPath": "C:\\Users\\lucas.silva79\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucas.silva79\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\obj\\",
+      "projectPath": "C:\\Users\\victor.rocha3\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
+      "packagesPath": "C:\\Users\\victor.rocha3\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\victor.rocha3\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\lucas.silva79\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\victor.rocha3\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
