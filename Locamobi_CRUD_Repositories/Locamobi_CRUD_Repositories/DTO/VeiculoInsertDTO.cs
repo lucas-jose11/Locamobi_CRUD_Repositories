@@ -6,7 +6,7 @@
         public string MODELO { get; set; }
         public string MARCA { get; set; }
         public int ANO { get; set; }
-        public int PLACA { get; set; }
+        public string PLACA { get; set; }
         public string COR { get; set; }
         public int CIDADE_CODCID { get; set; }
         public string CLASSIFIC { get; set; }

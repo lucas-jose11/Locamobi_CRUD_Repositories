@@ -25,6 +25,7 @@ namespace MeuPrimeiroCrud
                     switch (op)
                     {
                         case 'C':
+                            await Create();
                             break;
                         case 'R':
                             await Read();
@@ -53,12 +54,12 @@ namespace MeuPrimeiroCrud
         }
     
 
-        public async Task Create()
+        static async Task Create()
         {
             VeiculoInsertDTO veiculoInsert = new VeiculoInsertDTO();
-            
-            //colocar um autoicrement aqui pra quando inserir novo veiculo adiconar ao codido auto.
-            //faltou CODVEICULO
+
+            //USUARIO_CODUSER depende de uma FK estrangeira, retornar ao codigo para resolver
+
             Console.Write("Informe o modelo: ");
             veiculoInsert.MODELO = Console.ReadLine();
 
@@ -69,7 +70,7 @@ namespace MeuPrimeiroCrud
             veiculoInsert.ANO = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Informe a placa: ");
-            veiculoInsert.PLACA = Convert.ToInt32(Console.ReadLine());
+            veiculoInsert.PLACA = Console.ReadLine();
 
             Console.Write("Informe o cor: ");
             veiculoInsert.COR = Console.ReadLine();
@@ -77,7 +78,7 @@ namespace MeuPrimeiroCrud
             Console.Write("Informe o código da cidade: ");
             veiculoInsert.CIDADE_CODCID = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
+            Console.WriteLine("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
             int option = Convert.ToInt32(Console.ReadLine());
             veiculoInsert.CLASSIFIC = DeterminatorClassific(option);
            
