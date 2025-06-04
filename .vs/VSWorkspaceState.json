@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Locamobi_CRUD_Repositories",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\bin",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Contracts",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Contracts\\Repository",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\DTO",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Entity",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Infrastructure",
+    "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Repository"
+  ],
+  "SelectedNode": "\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
