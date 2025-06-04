@@ -11,7 +11,7 @@
         public int CIDADE_CODCID { get; set; }
         public string CLASSIFIC { get; set; }
         public string TIPO { get; set; }
-        public string USUARIO_CODUSER { get; set; }
+        public int USUARIO_CODUSER { get; set; }
 
         public VeiculoEntity() { }
 

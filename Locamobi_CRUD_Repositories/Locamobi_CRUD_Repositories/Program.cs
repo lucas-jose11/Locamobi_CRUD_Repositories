@@ -86,6 +86,9 @@ namespace MeuPrimeiroCrud
             int option2 = Convert.ToInt32(Console.ReadLine());
             veiculoInsert.TIPO = DeterminatorTipo(option2);
 
+            Console.WriteLine("Infomre seu código unico ID");
+            veiculoInsert.USUARIO_CODUSER = Convert.ToInt32(Console.ReadLine());
+
             IVeiculoRepository veiculoRepository = new VeiculoRepository();
             await veiculoRepository.Insert(veiculoInsert);
             Console.WriteLine("Veiculo cadastrado com sucesso");
