@@ -5,7 +5,7 @@ namespace MeuPrimeiroCrud.Infrastructure
 {
     public class Connection
     {
-        protected string connectionString = "Server= ||| HOST ||| ;Database= ||| NOME DA DATABASE ||| ;User= ||| USER ||| ;Password= ||| SENHA ||| ;";
+        protected string connectionString = "Server=servidor_teste;Database=locamobi;User=root;Password=toor;";
 
         public MySqlConnection GetConnection()
         {

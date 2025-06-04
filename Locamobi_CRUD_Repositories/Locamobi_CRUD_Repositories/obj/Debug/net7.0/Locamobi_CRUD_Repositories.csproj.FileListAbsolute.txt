@@ -13,3 +13,12 @@ C:\Users\lucas.silva79\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Rep
 C:\Users\lucas.silva79\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.pdb
 C:\Users\lucas.silva79\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.genruntimeconfig.cache
 C:\Users\lucas.silva79\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\ref\Locamobi_CRUD_Repositories.dll
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.csproj.AssemblyReference.cache
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.AssemblyInfoInputs.cache
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.AssemblyInfo.cs
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.csproj.CoreCompileInputs.cache
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.sourcelink.json
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.dll
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\refint\Locamobi_CRUD_Repositories.dll
+C:\Users\lucas\source\repos\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\Locamobi_CRUD_Repositories\obj\Debug\net7.0\Locamobi_CRUD_Repositories.pdb
