@@ -1,8 +1,10 @@
 ﻿using Dapper;
 using Locamobi_CRUD_Repositories.Contracts.Repository;
+using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using MeuPrimeiroCrud.Infrastructure;
 using MySql.Data.MySqlClient;
+using System.Diagnostics.Contracts;
 
 namespace Locamobi_CRUD_Repositories.Repository
 {
@@ -19,24 +21,38 @@ namespace Locamobi_CRUD_Repositories.Repository
                             DATAINICIO AS {nameof(ContratoEntity.DataInicio)},
                             DATAFIM AS {nameof(ContratoEntity.DataFim)},
                             PRECOBASE AS {nameof(ContratoEntity.PrecoBase)},
-                            VEICULO_CODVEICULO AS {nameof(ContratoEntity.VeiculoCodVeiculo)},
-                            USUARIO_CODLOCTAR AS {nameof(ContratoEntity.UsuarioCodLoctar)},
-                            USUARIO_CODLOCDOR AS {nameof(ContratoEntity.UsuarioCodLocdor)},
-                      FROM MECANICO
+                            VEICULO_CODVEICULO AS {nameof(ContratoEntity.Veiculo_CodVeiculo)},
+                            USUARIO_CODLOCTAR AS {nameof(ContratoEntity.Usuario_CodLoctar)},
+                            USUARIO_CODLOCDOR AS {nameof(ContratoEntity.Usuario_CodLocdor)}
+                      FROM CONTRATO
                 ";
 
                 IEnumerable<ContratoEntity> contractList = await con.QueryAsync<ContratoEntity>(sql);
                 return contractList;
             }
+        } // Read
 
-
-
-            throw new NotImplementedException();
+        public async Task Insert(ContratoInsertDTO newContract) // Create
+        {
+            Connection _connection = new Connection(); //pq aq não precisa do using pra GetConnection?
+            string sql = @$"
+                 INSERT INTO CONTRATO (DATAINICIO, DATAFIM, PRECOBASE, VEICULOCODVEICULO, USUARIOCODLOCTAR, VEICULOCODDOR)
+                    VALUES
+                    (@DataInicio, @DataFim, @PrecoBase, @VeiculoCodVeiculo, @UsuarioCodLoctar, @UsuarioCodLocdor)
+            ";
+        
+            await _connection.Execute(sql, newContract);
         }
 
+        public async Task Delete(int idForDelete)
+        {
+            Connection _connection = new Connection();
+            string sql = @"
+                DELETE FROM CONTRATO
+                    WHERE CODCONTRATO = @idForDelete;
+            ";
+        }
 
-
-
-
+       
     }
 }

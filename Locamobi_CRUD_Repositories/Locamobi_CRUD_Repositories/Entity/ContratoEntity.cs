@@ -10,10 +10,10 @@
 
         public int PrecoBase { get; set; }
 
-        public int VeiculoCodVeiculo { get; set; }
+        public int Veiculo_CodVeiculo { get; set; }
 
-        public int UsuarioCodLoctar { get; set; }
+        public int Usuario_CodLoctar { get; set; }
 
-        public int UsuarioCodLocdor { get; set; }
+        public int Usuario_CodLocdor { get; set; }
     }
 }
