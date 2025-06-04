@@ -5,7 +5,7 @@ namespace MeuPrimeiroCrud.Infrastructure
 {
     public class Connection
     {
-        // test
+        
         protected string connectionString = "Server=localhost;Database=locamobi;User=root;Password=root;";
 
         public MySqlConnection GetConnection()
@@ -15,10 +15,8 @@ namespace MeuPrimeiroCrud.Infrastructure
 
         public async Task<int> Execute(string sql, object obj)
         {
-            using(MySqlConnection con = GetConnection())
-            {
-                return await con.ExecuteAsync(sql, obj);
-            }
+            using var con = GetConnection();
+            return await con.ExecuteAsync(sql, obj);
         }
 
     }
