@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PKIgpIKbwyM=",
+  "dgSpecHash": "fKLpYYdGP/A=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuário\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
+  "projectFilePath": "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuário\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",

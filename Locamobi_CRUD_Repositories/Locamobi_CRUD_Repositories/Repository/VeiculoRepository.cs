@@ -46,9 +46,16 @@ namespace Locamobi_CRUD_Repositories.Repository
             throw new NotImplementedException();
         }
 
-        public Task Insert(VeiculoInsertDTO veiculoInsert)
+        public async Task Insert(VeiculoInsertDTO veiculoInsert)
         {
-            throw new NotImplementedException();
+            Connection _connection = new Connection();
+            string sql = $@"
+                            INSERT INTO veiculo (MODELO, MARCA, ANO, PLACA,
+                                COR, CIDADE_CODCID, CLASSIFIC, TIPO, USUARIO_CODUSER) 
+                                    VALUES  (@Modelo, @Marca, @Ano, @Placa,
+                                        @Cor, @Cidade_CodCid, @Classific, @Tipo, @Usuario_CodUser)";
+
+            await _connection.Execute(sql, veiculoInsert);
         }
 
         public Task Update(VeiculoInsertDTO veiculoUpdate)

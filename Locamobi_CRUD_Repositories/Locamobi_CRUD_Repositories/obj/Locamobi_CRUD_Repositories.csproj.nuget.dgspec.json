@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuário\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj": {}
+    "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuário\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj": {
+    "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
         "projectName": "Locamobi_CRUD_Repositories",
-        "projectPath": "C:\\Users\\Usuário\\source\\repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
+        "projectPath": "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Usuário\\Source\\Repos\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\Locamobi_CRUD_Repositories\\obj\\",
         "projectStyle": "PackageReference",

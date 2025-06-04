@@ -53,18 +53,17 @@ namespace MeuPrimeiroCrud
             foreach (VeiculoEntity veiculo in veiculoList)
             {
                 Console.WriteLine($"Codigo do veiculo: {veiculo.CODVEICULO}");
-                Console.WriteLine($"Modelo: {veiculo.MODELO}");
-                Console.WriteLine($"Marca: {veiculo.MARCA}");
-                Console.WriteLine($"Ano: {veiculo.ANO}");
-                Console.WriteLine($"Placa: {veiculo.PLACA}");
-                Console.WriteLine($"Cor: {veiculo.COR}");
-                Console.WriteLine($"Codigo da cidade: {veiculo.CIDADE_CODCID}");
-                Console.WriteLine($"Classificação: {veiculo.CLASSIFIC}");
-                Console.WriteLine($"Tipos: {veiculo.TIPO}");
-                Console.WriteLine($"Código do usúario: {veiculo.USUARIO_CODUSER}");
-
+                Console.Write($"Modelo: {veiculo.MODELO} | ");
+                Console.Write($"Marca: {veiculo.MARCA} | ");
+                Console.Write($"Ano: {veiculo.ANO}  | ");
+                Console.Write($"Placa: {veiculo.PLACA}  | ");
+                Console.WriteLine($"Cor: {veiculo.COR}  | ");
+                Console.Write($"Codigo da cidade: {veiculo.CIDADE_CODCID}   | ");
+                Console.Write($"Classificação: {veiculo.CLASSIFIC}   | ");
+                Console.Write($"Tipos: {veiculo.TIPO}   | ");
+                Console.WriteLine($"Código do usúario: {veiculo.USUARIO_CODUSER}  | \n");
+                Console.WriteLine("===================================================== \n");
             
-         
             }
 
         }
