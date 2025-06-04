@@ -38,7 +38,7 @@ namespace Crudzin
                         break;
                 }
 
-                Console.WriteLine("Pressione enter para continuas");
+                Console.WriteLine("Pressione enter para continuar");
                 Console.ReadLine();
                 Console.Clear();
 
