@@ -30,16 +30,13 @@ namespace Locamobi_CRUD_Repositories.Repository
                 IEnumerable<VeiculoEntity> veiculoList = await con.QueryAsync<VeiculoEntity>(sql);
                 return veiculoList;
             }
+
+
         }
 
 
 
         public Task Delete(int codVeiculo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<VeiculoEntity>> GetAll()
         {
             throw new NotImplementedException();
         }

@@ -4,11 +4,8 @@
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, world"); Console.WriteLine("teste");
-            Console.WriteLine("teste");
-            Console.WriteLine("teste");
-            
-            Console.WriteLine("teste");
+            Console.WriteLine("Hello world");
+           
          
 
         }
