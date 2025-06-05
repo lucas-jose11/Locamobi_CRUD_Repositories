@@ -9,9 +9,11 @@ namespace Locamobi_CRUD_Repositories.Contracts.Repository
 
         Task Insert(ContratoInsertDTO newContract);    // task pro Create
 
-        Task Delete(int id); // task pro Delete
+        Task Update(ContratoEntity contract); // task pro Update
 
-        // Task GetById(int id); // task pra conseguir o id pra update
+        Task<ContratoEntity> GetById(int id); // task pra conseguir o id para o Update
+
+        Task Delete(int id); // task pro Delete
 
     }
 }

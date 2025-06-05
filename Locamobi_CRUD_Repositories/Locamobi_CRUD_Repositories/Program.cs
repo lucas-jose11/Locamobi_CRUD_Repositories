@@ -3,7 +3,9 @@ using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
 using MeuPrimeiroCrud.Infrastructure;
+using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
+using System.Diagnostics.Contracts;
 
 namespace MeuPrimeiroCrud
 {
@@ -78,7 +80,7 @@ namespace MeuPrimeiroCrud
 
 
 
-        static async Task Create()
+        static async Task Create() // falta fazer a tratativa
         {
             ContratoRepository contratoRepository = new ContratoRepository();
             Connection _connection = new Connection();
@@ -136,13 +138,70 @@ namespace MeuPrimeiroCrud
         }
 
 
-        static async Task Update()
+        static async Task Update() // falta fazer a tratativa
         {
+            await Read();
 
+            Console.WriteLine("-------------");
+            Console.WriteLine("Me diga o códido do contrato que você quer alterar as informações:");
+            int codContract = int.Parse(Console.ReadLine());
+
+            Console.Clear();
+
+            IContratoRepository contractRepository = new ContratoRepository();
+            ContratoEntity contractToUpdate = await contractRepository.GetById( codContract );
+            
+            Console.WriteLine($@"-------------------
+Código do Contrato: {contractToUpdate.CodContrato};
+Data Início: {contractToUpdate.DataInicio};
+Data Fim: {contractToUpdate.DataFim};
+Preço Base (diária): {contractToUpdate.PrecoBase}
+Veículo_Código Veículo (FK): {contractToUpdate.Veiculo_CodVeiculo};
+Código Usuário (locatário): {contractToUpdate.Usuario_CodLoctar};
+Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
+-------------------
+            ");
+           
+            Console.WriteLine("");
+
+            Console.WriteLine("Era esse o contrato para editar? S para sim ou qualquer outra tecla para voltar");
+            char confirmationToUpdate = Console.ReadLine().ToUpper()[0];
+
+            if (confirmationToUpdate != 'S')
+                return;
+
+            Console.WriteLine("Escreva a nova data de início do contrato ou escreva a atual para deixar assim, escreva no formato aaaa--mm-dd:"); // aranjar um jeito de editar apenas os campos que quer, mas fácil de passar por isso
+            string newStartDate = Console.ReadLine();
+
+            Console.WriteLine("Escreva a nova data de término do contrato ou escreva a atual para deixar assim, escreva no formato aaaa--mm-dd:");
+            string newEndDate = Console.ReadLine();
+
+            Console.WriteLine("Escreva o novo preço diário ou escreva o atual para deixar assim:");
+            int newBasePrice = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Escreva o código do veículo novo ou escreva o atual para deixar assim:");
+            int newVehicle_CodeVehicle = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Escreva o código de usuário do novo locatário ou escreva o atual para deixar assim:");
+            int newUser_CodeTenant = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Escreva o código de usuário do novo locador ou escreva o atual para deixar assim:");
+            int newUser_CodeLandlord = int.Parse(Console.ReadLine());
+
+            contractToUpdate.DataInicio = newStartDate;
+            contractToUpdate.DataFim = newEndDate;
+            contractToUpdate.PrecoBase = newBasePrice;
+            contractToUpdate.Veiculo_CodVeiculo = newVehicle_CodeVehicle;
+            contractToUpdate.Usuario_CodLoctar = newUser_CodeTenant;
+            contractToUpdate.Usuario_CodLocdor = newUser_CodeLandlord;
+
+            await contractRepository.Update(contractToUpdate);
+
+            Console.WriteLine("Contrato alterado com suecesso!");
         }
 
 
-        static async Task Delete()
+        static async Task Delete() // falta fazer a tratativa, se precisar
         {
             ContratoRepository contratoRepository = new ContratoRepository();
             await Read();

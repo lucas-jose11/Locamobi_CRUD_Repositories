@@ -1,6 +1,6 @@
 ﻿namespace Locamobi_CRUD_Repositories.Entity
 {
-    public class ContratoEntity
+    public class ContratoEntity //deixar eles private e usar get e set para tratativa
     {
         public int CodContrato { get; set; }
 
