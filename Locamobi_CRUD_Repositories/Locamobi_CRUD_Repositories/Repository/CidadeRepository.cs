@@ -31,7 +31,6 @@ namespace Crudzin.Repository
 
                 IEnumerable<CidadeEntity> cityList = await con.QueryAsync<CidadeEntity>(sql);
                 return cityList;
-
             }
         }
 
