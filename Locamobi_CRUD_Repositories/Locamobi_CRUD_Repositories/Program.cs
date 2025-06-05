@@ -68,7 +68,7 @@ namespace MeuPrimeiroCrud
                 Console.WriteLine(userEntity.Email);
                 Console.WriteLine(userEntity.Password);
                 Console.WriteLine(userEntity.PhoneNumber);
-                Console.WriteLine(userEntity.Adress);
+                Console.WriteLine(userEntity.Address);
                 Console.WriteLine(userEntity.CityId);
                 Console.WriteLine();
             }
@@ -93,7 +93,7 @@ namespace MeuPrimeiroCrud
             string newEmail = Console.ReadLine();
             if (newEmail != string.Empty)
             {
-                user.Email = newName;
+                user.Email = newEmail;
             }
             Console.WriteLine("Insira uma nova senha para o usuário ou aperte enter para deixar inalterado: ");
             string newPassword = Console.ReadLine();
@@ -108,10 +108,10 @@ namespace MeuPrimeiroCrud
                 user.PhoneNumber = newPhoneNumber;
             }
             Console.WriteLine("Insira um novo endereço para o usuário ou aperte enter para deixar inalterado:");
-            string newAdress = Console.ReadLine();
-            if (newAdress != string.Empty)
+            string newAddress = Console.ReadLine();
+            if (newAddress != string.Empty)
             {
-                user.Adress = newAdress;
+                user.Address = newAddress;
             }
 
             await userRepository.Update(user);

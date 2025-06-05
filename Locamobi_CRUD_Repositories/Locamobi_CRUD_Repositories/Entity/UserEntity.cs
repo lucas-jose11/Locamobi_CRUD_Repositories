@@ -7,19 +7,18 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public int CityId { get; set; }
 
-        public UserEntity() { }
 
-        public UserEntity(int id, string name, string email, string password, string phoneNumber, string adress, int cityId) 
+        public UserEntity(int id, string name, string email, string password, string phoneNumber, string address, int cityId) 
         {
             Id = id;
             Name = name;
             Email = email;
             Password = password;
             PhoneNumber = phoneNumber;
-            Adress = adress;
+            Address = address;
             CityId = cityId;
         }
     }

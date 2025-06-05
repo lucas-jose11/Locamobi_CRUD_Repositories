@@ -30,7 +30,7 @@ namespace Locamobi_CRUD_Repositories.Repository
                                 EMAIL AS {nameof(UserEntity.Email)},
                                 SENHA AS {nameof(UserEntity.Password)},
                                 NUMERO AS {nameof(UserEntity.PhoneNumber)},
-                                ENDERECO AS {nameof(UserEntity.Adress)},
+                                ENDERECO AS {nameof(UserEntity.Address)},
                                 CIDADE_CODCID AS {nameof(UserEntity.CityId)}
                                 FROM usuario";
                 IEnumerable<UserEntity> userList = await con.QueryAsync<UserEntity>(sql);
@@ -47,7 +47,7 @@ namespace Locamobi_CRUD_Repositories.Repository
                                 EMAIL AS {nameof(UserEntity.Email)},
                                 SENHA AS {nameof(UserEntity.Password)},
                                 NUMERO AS {nameof(UserEntity.PhoneNumber)},
-                                ENDERECO AS {nameof(UserEntity.Adress)},
+                                ENDERECO AS {nameof(UserEntity.Address)},
                                 CIDADE_CODCID AS {nameof(UserEntity.CityId)}
                                 FROM usuario
                                 WHERE CODUSER = @Id";
@@ -68,7 +68,11 @@ namespace Locamobi_CRUD_Repositories.Repository
         public async Task Update(UserEntity user)
         {
             string sql = $@"UPDATE usuario 
-                            SET NOME = @Name
+                            SET NOME = @Name,
+                            EMAIL = @Email,
+                            ENDERECO = @Address,
+                            NUMERO = @PhoneNumber,
+                            SENHA = @Password
                             WHERE CODUSER = @Id";
             await _connection.Execute(sql, user);
         }
