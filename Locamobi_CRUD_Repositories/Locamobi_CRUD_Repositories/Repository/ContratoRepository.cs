@@ -44,13 +44,15 @@ namespace Locamobi_CRUD_Repositories.Repository
             await _connection.Execute(sql, newContract);
         }
 
-        public async Task Delete(int idForDelete)
+        public async Task Delete(int codContrato)
         {
             Connection _connection = new Connection();
             string sql = @"
                 DELETE FROM CONTRATO
-                    WHERE CODCONTRATO = @idForDelete;
+                    WHERE CODCONTRATO = @codContrato
             ";
+
+            await _connection.Execute(sql, new { codContrato });
         }
 
        

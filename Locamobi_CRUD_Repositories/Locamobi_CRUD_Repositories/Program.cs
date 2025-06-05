@@ -13,7 +13,7 @@ namespace MeuPrimeiroCrud
         {
             while (true)
             {
-                Console.Clear();
+                Console.Clear(); // tem pelo menos uma vez que ele vem pra cá e não passaria pelo Clear no ChooseOption
                 await ChooseOption(Menu()); //await para o async Main esperar terminar o ChooseOption e não usar a tecla para sair da função como próximo argumento
             }
         }
@@ -58,12 +58,18 @@ namespace MeuPrimeiroCrud
                     default:
                         throw new Exception("Opção inválida.");
                 }
+
+                Console.WriteLine("-----------------------------"); 
+                Console.WriteLine("Aperte ENTER para voltar");
+                Console.WriteLine("-----------------------------");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("\n--------------------------------------");
                 Console.WriteLine($"Erro: {ex.Message}");
-                Console.WriteLine("Escolha uma opção válida.");
+                if (ex.InnerException != null)
+                    Console.WriteLine($"Detalhes internos: {ex.InnerException.Message}");
                 Console.WriteLine("Aperte QUALQUER TECLA para continuar");
                 Console.WriteLine("--------------------------------------");
                 Console.ReadKey();
@@ -127,11 +133,6 @@ namespace MeuPrimeiroCrud
                 Console.WriteLine($"Código Usuário (locador): {contract.Usuario_CodLocdor}.");
                 Console.WriteLine("");
             }
-
-            Console.WriteLine("-----------------------------"); //arrumar pra n aparecer no Delete()
-            Console.WriteLine("Aperte ENTER para voltar");
-            Console.WriteLine("-----------------------------");
-            Console.ReadLine();
         }
 
 
@@ -154,10 +155,15 @@ namespace MeuPrimeiroCrud
             char confirmationToDelete = Console.ReadLine().ToUpper()[0];
 
             if (confirmationToDelete == 'S')
-                await contratoRepository.Delete(idForDelete)
-            else
             {
                 await contratoRepository.Delete(idForDelete);
+                Console.WriteLine("");
+                Console.WriteLine("Contrato deletado com sucesso!");
+            }
+            else
+            {
+                Console.Clear();
+                await Delete();
             }
         }
     }
