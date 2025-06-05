@@ -31,6 +31,7 @@ namespace MeuPrimeiroCrud
                             await Read();
                             break;
                         case 'U':
+                            await Update();
                             break;
                         case 'D':
                             await Delete();
@@ -82,7 +83,7 @@ namespace MeuPrimeiroCrud
             int option = Convert.ToInt32(Console.ReadLine());
             veiculoInsert.CLASSIFIC = DeterminatorClassific(option);
            
-            Console.Write("Informe o tipo: | 1 Carro | 2 Motocicleta |");
+            Console.WriteLine("Informe o tipo: | 1 Carro | 2 Motocicleta |");
             int option2 = Convert.ToInt32(Console.ReadLine());
             veiculoInsert.TIPO = DeterminatorTipo(option2);
 
@@ -147,6 +148,38 @@ namespace MeuPrimeiroCrud
             }
 
         }
+
+        static async Task Update()
+        { 
+            await Read();
+
+            Console.WriteLine("Informe o código do veiculo que deseja alterar");
+            int codVeic = Convert.ToInt32(Console.ReadLine());
+
+            IVeiculoRepository veiculoRepository = new VeiculoRepository();
+            VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
+
+            Console.WriteLine($"Informe um novo modelo para (-{veiculoEntity.MODELO}-) enter para salvar mesmo modelo");
+            string modelo = UpdateString(Console.ReadLine());
+            veiculoEntity.MODELO = modelo;
+
+            await veiculoRepository.Update(veiculoEntity);
+
+            Console.WriteLine("Veiculo cadastrado com sucesso!") ;
+
+        }
+
+        static string UpdateString(string name)
+        {
+            if (name != string.Empty)           
+                 return name;
+           
+            
+
+        }
+
+
+
 
         static async Task Delete()
         { 

@@ -7,11 +7,11 @@ namespace Locamobi_CRUD_Repositories.Contracts.Repository
     {
         Task<IEnumerable<VeiculoEntity>> GetAll();
 
-        Task<VeiculoEntity> GetByCodVeiculo(int codVeiculo);
-
         Task Insert(VeiculoInsertDTO veiculoInsert);
 
-        Task Update(VeiculoInsertDTO veiculoUpdate);
+        Task Update(VeiculoEntity veiculoUpdate);
+
+        Task<VeiculoEntity> GetByCodVeiculo(int codVeiculo);
 
         Task Delete(int codVeiculo);
 
