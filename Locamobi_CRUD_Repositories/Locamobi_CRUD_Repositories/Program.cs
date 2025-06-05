@@ -52,7 +52,7 @@ namespace MeuPrimeiroCrud
             Console.WriteLine("Insira o número de telefone do usuário: ");
             user.PhoneNumber = Console.ReadLine();
             Console.WriteLine("Insira o endereço do usuário: ");
-            user.Adress = Console.ReadLine();
+            user.Address = Console.ReadLine();
 
             IUserRepository userRepository = new UserRepository();
             await userRepository.Insert(user);
@@ -109,8 +109,9 @@ namespace MeuPrimeiroCrud
 
             if (!string.IsNullOrWhiteSpace(newValue))
             {
-                var property = typeof(UserEntity).GetProperty(propertyName);
-                if (property != null && property.CanWrite)
+                var property = typeof(UserEntity).GetProperty(propertyName); /* typeof: pega a lista de todas as propriedades
+                de UserEntity, GetProperty pega a propriedade específica*/
+                if (property != null && property.CanWrite) //property.CanWrite: se a propriedade tem get e set e não apenas get(se pode ser alterável)
                 {
                     property.SetValue(user, newValue);
                 }
