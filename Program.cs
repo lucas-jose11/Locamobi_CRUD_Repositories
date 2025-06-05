@@ -12,7 +12,7 @@ namespace CRUD
             while (true)
             {
                 ShowMenu();
-                string input = Console.ReadLine()?.Trim().ToUpper();
+                string input = Console.ReadLine()?.Trim();
 
                 if (string.IsNullOrWhiteSpace(input)) continue;
 
