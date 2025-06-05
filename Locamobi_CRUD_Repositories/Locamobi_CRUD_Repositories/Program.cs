@@ -3,9 +3,6 @@ using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
 using MeuPrimeiroCrud.Infrastructure;
-using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
-using System.Diagnostics.Contracts;
 
 namespace MeuPrimeiroCrud
 {
@@ -140,18 +137,20 @@ namespace MeuPrimeiroCrud
 
         static async Task Update() // falta fazer a tratativa
         {
-            await Read();
+            try
+            {
+                await Read();
 
-            Console.WriteLine("-------------");
-            Console.WriteLine("Me diga o códido do contrato que você quer alterar as informações:");
-            int codContract = int.Parse(Console.ReadLine());
+                Console.WriteLine("-------------");
+                Console.WriteLine("Me diga o códido do contrato que você quer alterar as informações:");
+                int codContract = int.Parse(Console.ReadLine());
 
-            Console.Clear();
+                Console.Clear();
 
-            IContratoRepository contractRepository = new ContratoRepository();
-            ContratoEntity contractToUpdate = await contractRepository.GetById( codContract );
-            
-            Console.WriteLine($@"-------------------
+                IContratoRepository contractRepository = new ContratoRepository();
+                ContratoEntity contractToUpdate = await contractRepository.GetById(codContract);
+
+                Console.WriteLine($@"-------------------
 Código do Contrato: {contractToUpdate.CodContrato};
 Data Início: {contractToUpdate.DataInicio};
 Data Fim: {contractToUpdate.DataFim};
@@ -161,43 +160,42 @@ Código Usuário (locatário): {contractToUpdate.Usuario_CodLoctar};
 Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
 -------------------
             ");
-           
-            Console.WriteLine("");
 
-            Console.WriteLine("Era esse o contrato para editar? S para sim ou qualquer outra tecla para voltar");
-            char confirmationToUpdate = Console.ReadLine().ToUpper()[0];
+                Console.WriteLine("");
 
-            if (confirmationToUpdate != 'S')
+                Console.WriteLine("Era esse o contrato para editar? Digite S para sim ou qualquer outra tecla para voltar");
+                char confirmationToUpdate = Console.ReadLine().ToUpper()[0];
+
+                if (confirmationToUpdate != 'S')
+                    return;
+
+
+                contractToUpdate.DataInicio = UpdateProperty("Escreva a nova data de início do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa--mm-dd:");
+                contractToUpdate.DataFim = UpdateProperty("Escreva a nova data de término do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa--mm-dd:");
+                contractToUpdate.PrecoBase = UpdateProperty("Escreva o novo preço diário ou aperte enter sem nada escrito para deixar assim:");
+                contractToUpdate.Veiculo_CodVeiculo = UpdateProperty("Escreva o código do veículo novo ou aperte enter sem nada escrito para deixar assim:");
+                contractToUpdate.Usuario_CodLoctar = UpdateProperty("Escreva o código de usuário do novo locatário ou aperte enter sem nada escrito para deixar assim:");
+                contractToUpdate.Usuario_CodLocdor = UpdateProperty("Escreva o código de usuário do novo locador ou aperte enter sem nada escrito para deixar assim:");
+
+
+              
+
+                await contractRepository.Update(contractToUpdate);
+
+                Console.WriteLine("Contrato alterado com suecesso!");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}.\nVocê não escreveu num formato válido!");
                 return;
-
-            Console.WriteLine("Escreva a nova data de início do contrato ou escreva a atual para deixar assim, escreva no formato aaaa--mm-dd:"); // aranjar um jeito de editar apenas os campos que quer, mas fácil de passar por isso
-            string newStartDate = Console.ReadLine();
-
-            Console.WriteLine("Escreva a nova data de término do contrato ou escreva a atual para deixar assim, escreva no formato aaaa--mm-dd:");
-            string newEndDate = Console.ReadLine();
-
-            Console.WriteLine("Escreva o novo preço diário ou escreva o atual para deixar assim:");
-            int newBasePrice = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Escreva o código do veículo novo ou escreva o atual para deixar assim:");
-            int newVehicle_CodeVehicle = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Escreva o código de usuário do novo locatário ou escreva o atual para deixar assim:");
-            int newUser_CodeTenant = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Escreva o código de usuário do novo locador ou escreva o atual para deixar assim:");
-            int newUser_CodeLandlord = int.Parse(Console.ReadLine());
-
-            contractToUpdate.DataInicio = newStartDate;
-            contractToUpdate.DataFim = newEndDate;
-            contractToUpdate.PrecoBase = newBasePrice;
-            contractToUpdate.Veiculo_CodVeiculo = newVehicle_CodeVehicle;
-            contractToUpdate.Usuario_CodLoctar = newUser_CodeTenant;
-            contractToUpdate.Usuario_CodLocdor = newUser_CodeLandlord;
-
-            await contractRepository.Update(contractToUpdate);
-
-            Console.WriteLine("Contrato alterado com suecesso!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message} ");
+                return;
+            }
+            
+            
         }
 
 
@@ -225,5 +223,23 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
                 await Delete();
             }
         }
+
+        static string UpdateProperty(string prompt)
+        {
+            Console.WriteLine(prompt);
+            string answer = Console.ReadLine();
+            
+            if(!String.IsNullOrEmpty(answer))
+                return answer;
+
+            throw new Exception("Não pode ser null");
+        }
+ 
+        static int UpdateProperty(string prompt)
+        {
+            Console.WriteLine(prompt);
+            return int.Parse(Console.ReadLine());
+        }
+
     }
 }

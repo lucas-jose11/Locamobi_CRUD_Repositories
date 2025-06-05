@@ -36,9 +36,9 @@ namespace Locamobi_CRUD_Repositories.Repository
         {
             Connection _connection = new Connection(); //pq aq não precisa do using pra GetConnection?
             string sql = @$"
-                 INSERT INTO CONTRATO (DATAINICIO, DATAFIM, PRECOBASE, VEICULOCODVEICULO, USUARIOCODLOCTAR, VEICULOCODDOR)
+                 INSERT INTO CONTRATO (DATAINICIO, DATAFIM, PRECOBASE, VEICULO_CODVEICULO, USUARIO_CODLOCTAR, USUARIO_CODLOCDOR)
                     VALUES
-                    (@DataInicio, @DataFim, @PrecoBase, @VeiculoCodVeiculo, @UsuarioCodLoctar, @UsuarioCodLocdor)
+                    (@DataInicio, @DataFim, @PrecoBase, @Veiculo_CodVeiculo, @Usuario_CodLoctar, @Usuario_CodLocdor)
             ";
         
             await _connection.Execute(sql, newContract);
