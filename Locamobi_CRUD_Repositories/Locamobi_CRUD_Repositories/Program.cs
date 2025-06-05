@@ -81,39 +81,13 @@ namespace MeuPrimeiroCrud
 
             IUserRepository userRepository = new UserRepository();
             UserEntity user = await userRepository.GetById(id);
-
-            Console.WriteLine("Insira um novo nome para o usuário ou aperte enter para deixar inalterado: ");
-            string newName = Console.ReadLine();
             
-            if (newName != string.Empty)
-            {
-                user.Name = newName;
-            }
-            Console.WriteLine("Insira um novo email para o usuário ou aperte enter para deixar inalterado: ");
-            string newEmail = Console.ReadLine();
-            if (newEmail != string.Empty)
-            {
-                user.Email = newEmail;
-            }
-            Console.WriteLine("Insira uma nova senha para o usuário ou aperte enter para deixar inalterado: ");
-            string newPassword = Console.ReadLine();
-            if (newPassword != string.Empty)
-            {
-                user.Password = newPassword;
-            }
-            Console.WriteLine("Insira um novo número de telefone para o usuário ou aperte enter para deixar inalterado: ");
-            string newPhoneNumber = Console.ReadLine();
-            if (newPhoneNumber != string.Empty)
-            {
-                user.PhoneNumber = newPhoneNumber;
-            }
-            Console.WriteLine("Insira um novo endereço para o usuário ou aperte enter para deixar inalterado:");
-            string newAddress = Console.ReadLine();
-            if (newAddress != string.Empty)
-            {
-                user.Address = newAddress;
-            }
-
+            UpdateProperty(user,"Name","Insira um novo nome para o usuário ou aperte enter para deixar inalterado.");
+            UpdateProperty(user, "Email","Insira um novo email para o usuário ou aperte enter para deixar inalterado.");
+            UpdateProperty(user,"Password","Insira uma nova senha para o usuário ou aperte enter para deixar inalterado.");
+            UpdateProperty(user,"PhoneNumber","Insira um novo número de telefone para o usuário ou aperte enter para deixar inalterado.");
+            UpdateProperty(user,"Address","Insira um novo endereço para o usuário ou aperte enter para deixar inalterado.");
+            
             await userRepository.Update(user);
             Console.WriteLine("Usuário alterado com sucesso!");
         
@@ -126,6 +100,21 @@ namespace MeuPrimeiroCrud
             IUserRepository userRepository = new UserRepository();
             await userRepository.Delete(id);
             Console.WriteLine("Usuário deletado com sucesso!");
+        }
+
+        static void UpdateProperty(UserEntity user, string propertyName, string prompt)
+        {
+            Console.WriteLine(prompt);
+            string newValue = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(newValue))
+            {
+                var property = typeof(UserEntity).GetProperty(propertyName);
+                if (property != null && property.CanWrite)
+                {
+                    property.SetValue(user, newValue);
+                }
+            }
         }
     }
 }
