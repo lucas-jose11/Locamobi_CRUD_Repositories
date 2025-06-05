@@ -151,6 +151,8 @@ namespace MeuPrimeiroCrud
 
         static async Task Update()
         { 
+            //INSERIR TRY CATCH
+
             await Read();
 
             Console.WriteLine("Informe o código do veiculo que deseja alterar");
@@ -160,8 +162,42 @@ namespace MeuPrimeiroCrud
             VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
 
             Console.WriteLine($"Informe um novo modelo para (-{veiculoEntity.MODELO}-) enter para salvar mesmo modelo");
-            string modelo = UpdateString(Console.ReadLine());
+            string modelo = UpdateString(Console.ReadLine(),veiculoEntity.MODELO);
             veiculoEntity.MODELO = modelo;
+
+            Console.WriteLine($"Informe a nova marca: _______ |Enter para salavar {veiculoEntity.MARCA}|");
+            string marca = UpdateString(Console.ReadLine(), veiculoEntity.MARCA);
+            veiculoEntity.MARCA = marca;
+
+            Console.WriteLine($"Informe o novo ano: _______ |Enter para salavar {veiculoEntity.ANO}|");
+            int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO);
+            veiculoEntity.ANO = ano;
+
+            Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|");
+            string placa = UpdateString(Console.ReadLine(), veiculoEntity.PLACA);
+            veiculoEntity.PLACA = placa;
+
+            Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|");
+            string cor = UpdateString(Console.ReadLine(), veiculoEntity.COR);
+            veiculoEntity.COR = cor;
+
+            Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salavar {veiculoEntity.CIDADE_CODCID}|");
+            int cidadeCod = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.CIDADE_CODCID);
+            veiculoEntity.CIDADE_CODCID = cidadeCod;
+
+            
+            Console.WriteLine($"Infomre a nova classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium| Enter para salvar {veiculoEntity.CLASSIFIC}|");
+            string classific = DeterminatorClassific(Convert.ToInt32(Console.ReadLine()));
+            veiculoEntity.CLASSIFIC = classific;
+
+            Console.WriteLine($"Infomre o novo tipo: | 1 Carro | 2 Motocicleta | Enter para salvar {veiculoEntity.TIPO}|");
+            string tipo = DeterminatorTipo(Convert.ToInt32(Console.ReadLine()));
+            veiculoEntity.TIPO = tipo;
+
+            Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salavar {veiculoEntity.USUARIO_CODUSER}|");
+            int usuarioCodigo = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.USUARIO_CODUSER);
+            veiculoEntity.USUARIO_CODUSER = usuarioCodigo;
+
 
             await veiculoRepository.Update(veiculoEntity);
 
@@ -169,15 +205,22 @@ namespace MeuPrimeiroCrud
 
         }
 
-        static string UpdateString(string name)
+        static int UpdateInt(int new_, int current)
         {
-            if (name != string.Empty)           
-                 return name;
-           
-            
-
+            if (new_ != 0)
+                return new_;
+            else
+                return current;
         }
 
+        static string UpdateString(string new_,string current )
+        {
+            if (new_ != string.Empty)
+                return new_;
+            else
+                return current;
+        }
+        
 
 
 
