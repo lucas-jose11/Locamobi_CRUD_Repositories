@@ -57,7 +57,7 @@ namespace Locamobi_CRUD_Repositories.Repository
                         VEICULO_CODVEICULO = @Veiculo_CodVeiculo,
                         USUARIO_CODLOCTAR = @Usuario_CodLoctar,
                         USUARIO_CODLOCDOR = @Usuario_CodLocdor
-                    WHERE CODCONTRATO = @codContrato
+                    WHERE CODCONTRATO = @CodContrato
             ";
 
             await _connection.Execute(sql, contract);

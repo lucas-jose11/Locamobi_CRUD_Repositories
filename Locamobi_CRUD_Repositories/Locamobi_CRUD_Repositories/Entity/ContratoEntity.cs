@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
+﻿
 namespace Locamobi_CRUD_Repositories.Entity
 {
     public class ContratoEntity 
@@ -17,5 +16,6 @@ namespace Locamobi_CRUD_Repositories.Entity
         public int Usuario_CodLoctar;
 
         public int Usuario_CodLocdor;
-            }
+    
+    }
 }

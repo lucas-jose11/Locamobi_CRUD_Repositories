@@ -27,6 +27,7 @@ namespace MeuPrimeiroCrud
             Console.WriteLine("R - READ");
             Console.WriteLine("U - UPDATE");
             Console.WriteLine("D - DELETE");
+            Console.WriteLine("[0] - SAIR");
 
             char op = Console.ReadLine().ToUpper()[0];
             return op;
@@ -65,53 +66,39 @@ namespace MeuPrimeiroCrud
             }
             catch (Exception ex)
             {
-                Console.WriteLine("\n--------------------------------------");
+                Console.WriteLine("===========================================================");
                 Console.WriteLine($"Erro: {ex.Message}");
                 if (ex.InnerException != null)
                     Console.WriteLine($"Detalhes internos: {ex.InnerException.Message}");
                 Console.WriteLine("Aperte QUALQUER TECLA para continuar");
-                Console.WriteLine("--------------------------------------");
+                Console.WriteLine("===========================================================");
                 Console.ReadKey();
             }
         }
 
+        
 
-
-        static async Task Create() // falta fazer a tratativa
+        static async Task Create()
         {
+            ContratoInsertDTO newContract = new ContratoInsertDTO();
+
+            Console.WriteLine("=========================================================");
+            string newStartDate = CreateProperty("Digite a data de início do contrato (formato aaaa-mm-dd):");
+            string newEndDate = CreateProperty("Digite a data de término do contrato (formato aaaa-mm-dd):");
+            string newBasePrice = CreateProperty("Digite o preço da diária (apenas o número):");
+            string newVehicle_CodeVehicle = CreateProperty("Digite o código do veículo:");
+            string newUser_CodeTenant = CreateProperty("Digite o código do locatário:");
+            string newUser_CodeLandlord = CreateProperty("Digite o código do locador:");
+
+            newContract.DataInicio = newStartDate;
+            newContract.DataFim = newEndDate;
+            newContract.PrecoBase = IntChecker(newBasePrice, "O preço da diária deve ser um número inteiro.");
+            newContract.Veiculo_CodVeiculo = IntChecker(newVehicle_CodeVehicle, "O código do veículo deve ser um número inteiro.");
+            newContract.Usuario_CodLoctar = IntChecker(newUser_CodeTenant, "O código de usuário do locatário deve ser um número inteiro.");
+            newContract.Usuario_CodLocdor = IntChecker(newUser_CodeLandlord, "O código de usuário do locador deve ser um número inteiro.");
+
             ContratoRepository contratoRepository = new ContratoRepository();
-            Connection _connection = new Connection();
-
-
-            Console.WriteLine("Digite a data de início do contrato (formato dd/mm/aaaa):");
-            string dataInicio = Console.ReadLine();
-
-            Console.WriteLine("Digite a data de término do contrato (formato dd/mm/aaaa):");
-            string dataFim = Console.ReadLine();
-
-            Console.WriteLine("Digite o preço da diária (apenas o número):");
-            int precoBase = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Digite o código do veículo:");
-            int veiculo_CodVeiculo = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Digite o código do locatário:");
-            int usuario_CodLoctar = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Digite o código do locador:");
-            int usuario_CodLocdor = int.Parse(Console.ReadLine());
-
-            ContratoInsertDTO newContract = new ContratoInsertDTO(
-                dataInicio,
-                dataFim,
-                precoBase,
-                veiculo_CodVeiculo,
-                usuario_CodLoctar,
-                usuario_CodLocdor
-            );
-
             await contratoRepository.Insert(newContract);
-
             Console.WriteLine("Contrato adicionado com sucesso!");
         }
 
@@ -141,7 +128,7 @@ namespace MeuPrimeiroCrud
             {
                 await Read();
 
-                Console.WriteLine("-------------");
+                Console.WriteLine("==================================================================");
                 Console.WriteLine("Me diga o códido do contrato que você quer alterar as informações:");
                 int codContract = int.Parse(Console.ReadLine());
 
@@ -170,15 +157,32 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
                     return;
 
 
-                contractToUpdate.DataInicio = UpdateProperty("Escreva a nova data de início do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa--mm-dd:");
-                contractToUpdate.DataFim = UpdateProperty("Escreva a nova data de término do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa--mm-dd:");
-                contractToUpdate.PrecoBase = UpdateProperty("Escreva o novo preço diário ou aperte enter sem nada escrito para deixar assim:");
-                contractToUpdate.Veiculo_CodVeiculo = UpdateProperty("Escreva o código do veículo novo ou aperte enter sem nada escrito para deixar assim:");
-                contractToUpdate.Usuario_CodLoctar = UpdateProperty("Escreva o código de usuário do novo locatário ou aperte enter sem nada escrito para deixar assim:");
-                contractToUpdate.Usuario_CodLocdor = UpdateProperty("Escreva o código de usuário do novo locador ou aperte enter sem nada escrito para deixar assim:");
+                string newStartDate = UpdateProperty("Escreva a nova data de início do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa-mm-dd:");
+                string newEndDate = UpdateProperty("Escreva a nova data de término do contrato ou aperte enter sem nada escrito para deixar assim, escreva no formato aaaa-mm-dd:");
+                string newBasePrice = UpdateProperty("Escreva o novo preço diário ou aperte enter sem nada escrito para deixar assim:");
+                string newVehicle_CodeVehicle = UpdateProperty("Escreva o código do veículo novo ou aperte enter sem nada escrito para deixar assim:");
+                string newUser_CodeTenant = UpdateProperty("Escreva o código de usuário do novo locatário ou aperte enter sem nada escrito para deixar assim:");
+                string newUser_CodeLandlord = UpdateProperty("Escreva o código de usuário do novo locador ou aperte enter sem nada escrito para deixar assim:");
 
 
-              
+                if (!String.IsNullOrEmpty(newStartDate))
+                    contractToUpdate.DataInicio = newStartDate;
+
+                if (!String.IsNullOrEmpty(newEndDate))
+                    contractToUpdate.DataFim = newEndDate;
+                
+                if (!String.IsNullOrEmpty(newBasePrice))
+                    contractToUpdate.PrecoBase = IntChecker(newBasePrice, "Digite um número inteiro para o novo preço diário.");
+
+                if(!String.IsNullOrEmpty(newVehicle_CodeVehicle))
+                    contractToUpdate.Veiculo_CodVeiculo = IntChecker(newVehicle_CodeVehicle, "O código do veículo novo deve ser um número inteiro.");
+                
+                if(!String.IsNullOrEmpty (newUser_CodeTenant))
+                    contractToUpdate.Usuario_CodLoctar = IntChecker(newUser_CodeTenant, "O código de usuário do locatário deve ser um número inteiro.");
+                
+                if(!String.IsNullOrEmpty(newUser_CodeLandlord))
+                    contractToUpdate.Usuario_CodLocdor = IntChecker(newUser_CodeLandlord, "O código do usuário do locador deve ser um número inteiro.");
+
 
                 await contractRepository.Update(contractToUpdate);
 
@@ -199,16 +203,17 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
         }
 
 
-        static async Task Delete() // falta fazer a tratativa, se precisar
+        static async Task Delete()
         {
             ContratoRepository contratoRepository = new ContratoRepository();
             await Read();
 
-            Console.WriteLine("----------------");
+            Console.WriteLine("==========================================================================");
             Console.WriteLine("Qual o número do \"código do contrato\" da inserção que você quer deletar?");
             int idForDelete = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"Tem certeza que quer deletar o contrato com o código {idForDelete}? S para sim e qualquer outra letra para não");
+            Console.WriteLine("");
+            Console.WriteLine($"Tem certeza que quer deletar o contrato com o código ||{idForDelete}||? S para sim e qualquer outra letra para não");
             char confirmationToDelete = Console.ReadLine().ToUpper()[0];
 
             if (confirmationToDelete == 'S')
@@ -224,7 +229,8 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
             }
         }
 
-        static string UpdateProperty(string prompt)
+
+        static string CreateProperty(string prompt)
         {
             Console.WriteLine(prompt);
             string answer = Console.ReadLine();
@@ -232,14 +238,27 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
             if(!String.IsNullOrEmpty(answer))
                 return answer;
 
-            throw new Exception("Não pode ser null");
+            throw new Exception("====================\nNão pode ser nulo.");
         }
- 
-        static int UpdateProperty(string prompt)
+
+
+        static string UpdateProperty(string prompt)
         {
             Console.WriteLine(prompt);
-            return int.Parse(Console.ReadLine());
+            string answer = Console.ReadLine();
+
+            return answer;
         }
+
+        static int IntChecker(string number, string error)
+        {
+            if (int.TryParse(number, out int numberChecked))
+                return numberChecked;
+
+            throw new Exception($"{error}");
+        }
+
+
 
     }
 }
