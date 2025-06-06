@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿using System.Linq.Expressions;
+using Google.Protobuf.WellKnownTypes;
 using Locamobi_CRUD_Repositories.Contracts.Repository;
 using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
@@ -37,7 +38,7 @@ namespace MeuPrimeiroCrud
                             await Delete();
                             break;
                         default:
-                            Console.WriteLine("Error:");
+                            Console.WriteLine("OPÇÃO INVÁLIDA");
                             break;
                     }
 
@@ -47,9 +48,15 @@ namespace MeuPrimeiroCrud
 
                 }
             }
+
+            catch (FormatException)
+            {
+                Console.WriteLine("ERRO OPÇÃO INVÁLIDA INFORME UM VALOR VÁLIDO");
+            }
+
             catch (Exception ex)
             {
-                Console.WriteLine($"ERRO: {ex}");
+                Console.WriteLine($"ERRO REINICIE O SISTEMA {ex.Message}");
             }
 
         }
@@ -57,42 +64,55 @@ namespace MeuPrimeiroCrud
 
         static async Task Create()
         {
-            VeiculoInsertDTO veiculoInsert = new VeiculoInsertDTO();
+            try
+            {
+                VeiculoInsertDTO veiculoInsert = new VeiculoInsertDTO();
 
-            //USUARIO_CODUSER depende de uma FK estrangeira, retornar ao codigo para resolver
+                //USUARIO_CODUSER depende de uma FK estrangeira, retornar ao codigo para resolver
 
-            Console.Write("Informe o modelo: ");
-            veiculoInsert.MODELO = Console.ReadLine();
+                Console.Write("Informe o modelo: ");
+                veiculoInsert.MODELO = Console.ReadLine();
 
-            Console.Write("Informe a marca: ");
-            veiculoInsert.MARCA = Console.ReadLine();
+                Console.Write("Informe a marca: ");
+                veiculoInsert.MARCA = Console.ReadLine();
 
-            Console.Write("Informe o ano: ");
-            veiculoInsert.ANO = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Informe o ano: ");
+                veiculoInsert.ANO = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Informe a placa: ");
-            veiculoInsert.PLACA = Console.ReadLine();
+                Console.Write("Informe a placa: ");
+                veiculoInsert.PLACA = Console.ReadLine();
 
-            Console.Write("Informe o cor: ");
-            veiculoInsert.COR = Console.ReadLine();
+                Console.Write("Informe o cor: ");
+                veiculoInsert.COR = Console.ReadLine();
 
-            Console.Write("Informe o código da cidade: ");
-            veiculoInsert.CIDADE_CODCID = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Informe o código da cidade: ");
+                veiculoInsert.CIDADE_CODCID = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
-            int option = Convert.ToInt32(Console.ReadLine());
-            veiculoInsert.CLASSIFIC = DeterminatorClassific(option);
-           
-            Console.WriteLine("Informe o tipo: | 1 Carro | 2 Motocicleta |");
-            int option2 = Convert.ToInt32(Console.ReadLine());
-            veiculoInsert.TIPO = DeterminatorTipo(option2);
+                Console.WriteLine("Informe a classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium |");
+                int option = Convert.ToInt32(Console.ReadLine());
+                veiculoInsert.CLASSIFIC = DeterminatorClassific(option);
 
-            Console.WriteLine("Infomre seu código unico ID");
-            veiculoInsert.USUARIO_CODUSER = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Informe o tipo: | 1 Carro | 2 Motocicleta |");
+                int option2 = Convert.ToInt32(Console.ReadLine());
+                veiculoInsert.TIPO = DeterminatorTipo(option2);
 
-            IVeiculoRepository veiculoRepository = new VeiculoRepository();
-            await veiculoRepository.Insert(veiculoInsert);
-            Console.WriteLine("Veiculo cadastrado com sucesso");
+                Console.WriteLine("Infomre seu código unico ID");
+                veiculoInsert.USUARIO_CODUSER = Convert.ToInt32(Console.ReadLine());
+
+                IVeiculoRepository veiculoRepository = new VeiculoRepository();
+                await veiculoRepository.Insert(veiculoInsert);
+                Console.WriteLine("Veiculo cadastrado com sucesso");
+            }
+
+            catch (FormatException)
+            {
+                Console.WriteLine("ERRO OPÇÃO INVÁLIDA INFORME UM VALOR VÁLIDO");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERRO REINICIE O SISTEMA {ex.Message}");
+            }
         }
 
          static string DeterminatorClassific(int option)
@@ -150,58 +170,71 @@ namespace MeuPrimeiroCrud
         }
 
         static async Task Update()
-        { 
-            //INSERIR TRY CATCH
+        {
+            try
+            {
 
-            await Read();
+                await Read();
 
-            Console.WriteLine("Informe o código do veiculo que deseja alterar");
-            int codVeic = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Informe o código do veiculo que deseja alterar");
+                int codVeic = Convert.ToInt32(Console.ReadLine());
 
-            IVeiculoRepository veiculoRepository = new VeiculoRepository();
-            VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
+                IVeiculoRepository veiculoRepository = new VeiculoRepository();
+                VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
 
-            Console.WriteLine($"Informe um novo modelo para (-{veiculoEntity.MODELO}-) enter para salvar mesmo modelo");
-            string modelo = UpdateString(Console.ReadLine(),veiculoEntity.MODELO);
-            veiculoEntity.MODELO = modelo;
+                Console.WriteLine($"Informe o novo modelo:      |Enter para salvar {veiculoEntity.MODELO}|");
+                string modelo = UpdateString(Console.ReadLine(), veiculoEntity.MODELO);
+                veiculoEntity.MODELO = modelo;
 
-            Console.WriteLine($"Informe a nova marca: _______ |Enter para salavar {veiculoEntity.MARCA}|");
-            string marca = UpdateString(Console.ReadLine(), veiculoEntity.MARCA);
-            veiculoEntity.MARCA = marca;
+                Console.WriteLine($"Informe a nova marca: _______ |Enter para salvar {veiculoEntity.MARCA}|");
+                string marca = UpdateString(Console.ReadLine(), veiculoEntity.MARCA);
+                veiculoEntity.MARCA = marca;
 
-            Console.WriteLine($"Informe o novo ano: _______ |Enter para salavar {veiculoEntity.ANO}|");
-            int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO);
-            veiculoEntity.ANO = ano;
+                Console.WriteLine($"Informe o novo ano: _______ |Enter para salvar {veiculoEntity.ANO}|");
+                int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO);
+                veiculoEntity.ANO = ano;
 
-            Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|");
-            string placa = UpdateString(Console.ReadLine(), veiculoEntity.PLACA);
-            veiculoEntity.PLACA = placa;
+                Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|");
+                string placa = UpdateString(Console.ReadLine(), veiculoEntity.PLACA);
+                veiculoEntity.PLACA = placa;
 
-            Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|");
-            string cor = UpdateString(Console.ReadLine(), veiculoEntity.COR);
-            veiculoEntity.COR = cor;
+                Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|");
+                string cor = UpdateString(Console.ReadLine(), veiculoEntity.COR);
+                veiculoEntity.COR = cor;
 
-            Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salavar {veiculoEntity.CIDADE_CODCID}|");
-            int cidadeCod = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.CIDADE_CODCID);
-            veiculoEntity.CIDADE_CODCID = cidadeCod;
-
-            
-            Console.WriteLine($"Infomre a nova classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium| Enter para salvar {veiculoEntity.CLASSIFIC}|");
-            string classific = DeterminatorClassific(Convert.ToInt32(Console.ReadLine()));
-            veiculoEntity.CLASSIFIC = classific;
-
-            Console.WriteLine($"Infomre o novo tipo: | 1 Carro | 2 Motocicleta | Enter para salvar {veiculoEntity.TIPO}|");
-            string tipo = DeterminatorTipo(Convert.ToInt32(Console.ReadLine()));
-            veiculoEntity.TIPO = tipo;
-
-            Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salavar {veiculoEntity.USUARIO_CODUSER}|");
-            int usuarioCodigo = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.USUARIO_CODUSER);
-            veiculoEntity.USUARIO_CODUSER = usuarioCodigo;
+                Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salvar {veiculoEntity.CIDADE_CODCID}|");
+                int cidadeCod = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.CIDADE_CODCID);
+                veiculoEntity.CIDADE_CODCID = cidadeCod;
 
 
-            await veiculoRepository.Update(veiculoEntity);
+                Console.WriteLine($"Infomre a nova classificação: | 1 Ecônomico | 2 Intermediário | 3 Premium| Enter para salvar {veiculoEntity.CLASSIFIC}|");
+                string classific = DeterminatorClassific(Convert.ToInt32(Console.ReadLine()));
+                veiculoEntity.CLASSIFIC = classific;
 
-            Console.WriteLine("Veiculo cadastrado com sucesso!") ;
+                Console.WriteLine($"Infomre o novo tipo: | 1 Carro | 2 Motocicleta | Enter para salvar {veiculoEntity.TIPO}|");
+                string tipo = DeterminatorTipo(Convert.ToInt32(Console.ReadLine()));
+                veiculoEntity.TIPO = tipo;
+
+                Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salvar {veiculoEntity.USUARIO_CODUSER}|");
+                int usuarioCodigo = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.USUARIO_CODUSER);
+                veiculoEntity.USUARIO_CODUSER = usuarioCodigo;
+
+
+                await veiculoRepository.Update(veiculoEntity);
+
+                Console.WriteLine("Veiculo cadastrado com sucesso!");
+            }
+
+            catch (FormatException)
+            {
+                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VALIDO");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERRO INESPERADO REINICIE O SISTEMA {ex.Message}");
+            }
+
 
         }
 
@@ -225,14 +258,26 @@ namespace MeuPrimeiroCrud
 
 
         static async Task Delete()
-        { 
-            await Read();
-            Console.WriteLine("Informe o código do veiculo que deseja excluir:");
-            int codVe = Convert.ToInt32(Console.ReadLine());
-            IVeiculoRepository veiculoRepository = new VeiculoRepository();
-            await veiculoRepository.Delete(codVe);
-            Console.WriteLine("Veiculo excluido com sucesso!");
-        
+        {
+            try
+            {
+                await Read();
+                Console.WriteLine("Informe o código do veiculo que deseja excluir:");
+                int codVe = Convert.ToInt32(Console.ReadLine());
+                IVeiculoRepository veiculoRepository = new VeiculoRepository();
+                await veiculoRepository.Delete(codVe);
+                Console.WriteLine("Veiculo excluido com sucesso!");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VALIDO");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERRO INESPERADO REINICIE O SISTEMA {ex.Message}");
+            }
+
         }
 
 
