@@ -2,7 +2,6 @@
 using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
-using MeuPrimeiroCrud.Infrastructure;
 
 namespace MeuPrimeiroCrud
 {
@@ -33,6 +32,7 @@ namespace MeuPrimeiroCrud
             return op;
         }
 
+
         static async Task ChooseOption(char op)
         {
             try
@@ -59,7 +59,7 @@ namespace MeuPrimeiroCrud
                         throw new Exception("Opção inválida.");
                 }
 
-                Console.WriteLine("-----------------------------"); 
+                Console.WriteLine("-----------------------------");
                 Console.WriteLine("Aperte ENTER para voltar");
                 Console.WriteLine("-----------------------------");
                 Console.ReadLine();
@@ -76,7 +76,6 @@ namespace MeuPrimeiroCrud
             }
         }
 
-        
 
         static async Task Create()
         {
@@ -122,7 +121,7 @@ namespace MeuPrimeiroCrud
         }
 
 
-        static async Task Update() // falta fazer a tratativa
+        static async Task Update()
         {
             try
             {
@@ -170,17 +169,17 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
 
                 if (!String.IsNullOrEmpty(newEndDate))
                     contractToUpdate.DataFim = newEndDate;
-                
+
                 if (!String.IsNullOrEmpty(newBasePrice))
                     contractToUpdate.PrecoBase = IntChecker(newBasePrice, "Digite um número inteiro para o novo preço diário.");
 
-                if(!String.IsNullOrEmpty(newVehicle_CodeVehicle))
+                if (!String.IsNullOrEmpty(newVehicle_CodeVehicle))
                     contractToUpdate.Veiculo_CodVeiculo = IntChecker(newVehicle_CodeVehicle, "O código do veículo novo deve ser um número inteiro.");
-                
-                if(!String.IsNullOrEmpty (newUser_CodeTenant))
+
+                if (!String.IsNullOrEmpty(newUser_CodeTenant))
                     contractToUpdate.Usuario_CodLoctar = IntChecker(newUser_CodeTenant, "O código de usuário do locatário deve ser um número inteiro.");
-                
-                if(!String.IsNullOrEmpty(newUser_CodeLandlord))
+
+                if (!String.IsNullOrEmpty(newUser_CodeLandlord))
                     contractToUpdate.Usuario_CodLocdor = IntChecker(newUser_CodeLandlord, "O código do usuário do locador deve ser um número inteiro.");
 
 
@@ -198,8 +197,8 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
                 Console.WriteLine($"Erro: {ex.Message} ");
                 return;
             }
-            
-            
+
+
         }
 
 
@@ -230,17 +229,17 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
         }
 
 
+
         static string CreateProperty(string prompt)
         {
             Console.WriteLine(prompt);
             string answer = Console.ReadLine();
-            
-            if(!String.IsNullOrEmpty(answer))
+
+            if (!String.IsNullOrEmpty(answer))
                 return answer;
 
             throw new Exception("====================\nNão pode ser nulo.");
         }
-
 
         static string UpdateProperty(string prompt)
         {
@@ -257,8 +256,6 @@ Código Usuário (locador): {contractToUpdate.Usuario_CodLocdor}.
 
             throw new Exception($"{error}");
         }
-
-
 
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Locamobi_CRUD_Repositories.DTO
+﻿
+namespace Locamobi_CRUD_Repositories.DTO
 {
     public class ContratoInsertDTO
     {
@@ -13,7 +14,6 @@
         public int Usuario_CodLoctar { get; set; }
 
         public int Usuario_CodLocdor { get; set; }
-
         
     }
 }

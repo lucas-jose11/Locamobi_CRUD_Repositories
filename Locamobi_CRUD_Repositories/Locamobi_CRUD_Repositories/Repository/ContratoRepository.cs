@@ -4,13 +4,11 @@ using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using MeuPrimeiroCrud.Infrastructure;
 using MySql.Data.MySqlClient;
-using System.Diagnostics.Contracts;
 
 namespace Locamobi_CRUD_Repositories.Repository
 {
     public class ContratoRepository : IContratoRepository
     {
-
         public async Task<IEnumerable<ContratoEntity>> GetAll()
         {
             Connection _connection = new Connection();
@@ -32,7 +30,7 @@ namespace Locamobi_CRUD_Repositories.Repository
             }
         } // Read
 
-        public async Task Insert(ContratoInsertDTO newContract) // Create
+        public async Task Insert(ContratoInsertDTO newContract)
         {
             Connection _connection = new Connection(); //pq aq não precisa do using pra GetConnection?
             string sql = @$"
@@ -85,7 +83,7 @@ namespace Locamobi_CRUD_Repositories.Repository
             }
         }
 
-        public async Task Delete(int codContrato) // Delete
+        public async Task Delete(int codContrato)
         {
             Connection _connection = new Connection();
             string sql = @"

@@ -5,15 +5,15 @@ namespace Locamobi_CRUD_Repositories.Contracts.Repository
 {
     public interface IContratoRepository
     {
-        Task<IEnumerable<ContratoEntity>> GetAll(); // task pro Read
+        Task<IEnumerable<ContratoEntity>> GetAll();
 
-        Task Insert(ContratoInsertDTO newContract);    // task pro Create
+        Task Insert(ContratoInsertDTO newContract);
 
-        Task Update(ContratoEntity contract); // task pro Update
+        Task Update(ContratoEntity contract);
 
         Task<ContratoEntity> GetById(int id); // task pra conseguir o id para o Update
 
-        Task Delete(int id); // task pro Delete
+        Task Delete(int id);
 
     }
 }
