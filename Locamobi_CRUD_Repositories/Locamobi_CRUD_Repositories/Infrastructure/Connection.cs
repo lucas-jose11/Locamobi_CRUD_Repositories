@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
 
-namespace MeuPrimeiroCrud.Infrastructure
+namespace Locamobi_CRUD_Repositories.Infrastructure
 {
     public class Connection
     {

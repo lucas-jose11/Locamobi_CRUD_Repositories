@@ -2,7 +2,7 @@
 using Locamobi_CRUD_Repositories.Contracts.Repository;
 using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
-using MeuPrimeiroCrud.Infrastructure;
+using Locamobi_CRUD_Repositories.Infrastructure;
 using MySql.Data.MySqlClient;
 
 namespace Locamobi_CRUD_Repositories.Repository

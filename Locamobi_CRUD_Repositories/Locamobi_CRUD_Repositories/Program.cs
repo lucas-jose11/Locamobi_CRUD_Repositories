@@ -3,7 +3,7 @@ using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
 
-namespace MeuPrimeiroCrud
+namespace Locamobi_CRUD_Repositories
 {
     public class Program
     {
@@ -11,7 +11,7 @@ namespace MeuPrimeiroCrud
         {
             while (true)
             {
-                Console.WriteLine("Cadastro de cidade");
+                Console.WriteLine("Cadastro de usuário");
                 Console.WriteLine("C - CREATE");
                 Console.WriteLine("R - READ");
                 Console.WriteLine("U - UPDATE");
