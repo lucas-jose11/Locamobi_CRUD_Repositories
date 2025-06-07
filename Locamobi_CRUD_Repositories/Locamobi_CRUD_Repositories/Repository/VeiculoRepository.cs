@@ -44,7 +44,8 @@ namespace Locamobi_CRUD_Repositories.Repository
 
         }
 
-        public async Task<VeiculoEntity> GetByCodVeiculo(int codVeiculo)
+        public async Task<VeiculoEntity> GetByCodVeiculo(int codVeiculo) // JÁ QUE NÃO TEM O USUARIO_CODUSER AQ, QND VAI FZR O UPDATE, ELE NÃO APARECE O CÓDIGO ATUAL SALVO,
+                                                                         // APARECE APENAS "0"
         {
             Connection _connection = new Connection();
             using(MySqlConnection con = _connection.GetConnection())

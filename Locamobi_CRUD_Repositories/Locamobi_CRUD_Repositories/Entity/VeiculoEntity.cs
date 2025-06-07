@@ -2,7 +2,7 @@
 {
     public class VeiculoEntity
     {
-        public int CODVEICULO { get; set; }
+        public int CODVEICULO { get; set; } // seria só por convenção, mas no C# seria CodVeiculo, Modelo, Marca, etc...
         public string MODELO { get; set; }
         public string MARCA { get; set; }
         public int ANO { get; set; }
@@ -13,7 +13,7 @@
         public string TIPO { get; set; }
         public int USUARIO_CODUSER { get; set; }
 
-        public VeiculoEntity() { }
+        public VeiculoEntity() { } // apaga isso aq, não usa construtor
 
 
     }

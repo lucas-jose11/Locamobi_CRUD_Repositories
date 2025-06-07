@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq.Expressions; // os "using" que tiverem apagados pode deletar 
 using Google.Protobuf.WellKnownTypes;
 using Locamobi_CRUD_Repositories.Contracts.Repository;
 using Locamobi_CRUD_Repositories.DTO;
@@ -21,7 +21,7 @@ namespace MeuPrimeiroCrud
                     Console.WriteLine("Cadastro de Veiculo");
                     Console.WriteLine("Comandos \n");
                     Console.WriteLine("C - Create | R - Read | U - Update | D - Delete");
-                    char op = Convert.ToChar(Console.ReadLine());
+                    char op = Convert.ToChar(Console.ReadLine()); // como está, só aceitará se for maiúsculo, para aceitar minúsculo, utilize o ToUpper() também
 
                     switch (op)
                     {
@@ -96,7 +96,7 @@ namespace MeuPrimeiroCrud
                 int option2 = Convert.ToInt32(Console.ReadLine());
                 veiculoInsert.TIPO = DeterminatorTipo(option2);
 
-                Console.WriteLine("Infomre seu código unico ID");
+                Console.WriteLine("Infomre seu código unico ID"); // é bom especificar que é o código de usuário
                 veiculoInsert.USUARIO_CODUSER = Convert.ToInt32(Console.ReadLine());
 
                 IVeiculoRepository veiculoRepository = new VeiculoRepository();
@@ -115,10 +115,10 @@ namespace MeuPrimeiroCrud
             }
         }
 
-         static string DeterminatorClassific(int option)
+         static string DeterminatorClassific(int option) // gostei do nome kkkkk
          {
 
-            if (option == 1)
+            if (option == 1) // já que é um validador de int, pode fazer switch case, assim será melhor por questão de memória
                 return "economico";
 
             else if (option == 2)
@@ -129,27 +129,27 @@ namespace MeuPrimeiroCrud
                 return "premium";
 
             else
-                throw new ArgumentException($"Classificação não encontrada{option}"); 
+                throw new ArgumentException($"Classificação não encontrada{option}"); // o else aq seria o default do switch case
    
          }
 
         static string DeterminatorTipo(int option2)
         {
-            if (option2 == 1)
+            if (option2 == 1)  // aqui também poderia ser switch case, já que é apenas validação de valor
                 return "carro";
 
             else if (option2 == 2)
                 return "motocicleta";
 
             else
-                throw new ArgumentException($"Tipo não encontrada{option2}");
+                throw new ArgumentException($"Tipo não encontrada{option2}"); // aq seria o default do switch case
         }
 
 
             
         static async Task Read()
         {
-            IVeiculoRepository veiculoRepository = new VeiculoRepository();
+            IVeiculoRepository veiculoRepository = new VeiculoRepository(); // de nenhuma forma reclamando, mas lembre que o professor disse que seria bom, tudo que não for interação com usuário, fosse em inglês
             IEnumerable<VeiculoEntity> veiculoList = await veiculoRepository.GetAll();
             foreach (VeiculoEntity veiculo in veiculoList)
             {
@@ -161,7 +161,7 @@ namespace MeuPrimeiroCrud
                 Console.WriteLine($"Cor: {veiculo.COR}  | ");
                 Console.Write($"Codigo da cidade: {veiculo.CIDADE_CODCID}   | ");
                 Console.Write($"Classificação: {veiculo.CLASSIFIC}   | ");
-                Console.Write($"Tipos: {veiculo.TIPO}   | ");
+                Console.Write($"Tipos: {veiculo.TIPO}   | "); 
                 Console.WriteLine($"Código do usúario: {veiculo.USUARIO_CODUSER}  | \n");
                 Console.WriteLine("===================================================== \n");
             
@@ -182,7 +182,7 @@ namespace MeuPrimeiroCrud
                 IVeiculoRepository veiculoRepository = new VeiculoRepository();
                 VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
 
-                Console.WriteLine($"Informe o novo modelo:      |Enter para salvar {veiculoEntity.MODELO}|");
+                Console.WriteLine($"Informe o novo modelo:      |Enter para salvar {veiculoEntity.MODELO}|"); // falta o _________ que tem nos outros
                 string modelo = UpdateString(Console.ReadLine(), veiculoEntity.MODELO);
                 veiculoEntity.MODELO = modelo;
 
@@ -191,18 +191,18 @@ namespace MeuPrimeiroCrud
                 veiculoEntity.MARCA = marca;
 
                 Console.WriteLine($"Informe o novo ano: _______ |Enter para salvar {veiculoEntity.ANO}|");
-                int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO);
+                int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
                 veiculoEntity.ANO = ano;
 
-                Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|");
+                Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|"); // "Infomre"
                 string placa = UpdateString(Console.ReadLine(), veiculoEntity.PLACA);
                 veiculoEntity.PLACA = placa;
 
-                Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|");
+                Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|"); // "Infomre"
                 string cor = UpdateString(Console.ReadLine(), veiculoEntity.COR);
                 veiculoEntity.COR = cor;
 
-                Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salvar {veiculoEntity.CIDADE_CODCID}|");
+                Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salvar {veiculoEntity.CIDADE_CODCID}|"); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
                 int cidadeCod = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.CIDADE_CODCID);
                 veiculoEntity.CIDADE_CODCID = cidadeCod;
 
@@ -215,19 +215,20 @@ namespace MeuPrimeiroCrud
                 string tipo = DeterminatorTipo(Convert.ToInt32(Console.ReadLine()));
                 veiculoEntity.TIPO = tipo;
 
-                Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salvar {veiculoEntity.USUARIO_CODUSER}|");
+                Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salvar {veiculoEntity.USUARIO_CODUSER}|"); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
                 int usuarioCodigo = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.USUARIO_CODUSER);
                 veiculoEntity.USUARIO_CODUSER = usuarioCodigo;
 
 
                 await veiculoRepository.Update(veiculoEntity);
 
-                Console.WriteLine("Veiculo cadastrado com sucesso!");
+                Console.WriteLine("Veiculo cadastrado com sucesso!"); // ele foi alterado com sucesso*
             }
 
             catch (FormatException)
             {
-                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VALIDO");
+                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VALIDO"); // nem sei se o professor vai pedir, mas erros de pontuação/gramaática tem aq e ali no código,
+                                                                             // mas eu n vou ser o chato de pontuar cada um, eu acharia isso mt irritante dependendo da situação se fosse feito cmg
             }
 
             catch (Exception ex)
@@ -238,15 +239,19 @@ namespace MeuPrimeiroCrud
 
         }
 
-        static int UpdateInt(int new_, int current)
+        static int UpdateInt(int new_, int current) // que maneira esperta de voltar o atual irmão, parabéns,
+                                                    // eu tive problema com isso e n pensei como você,
+                                                    // mas tvlz seja um pouco errado, já que vai "atualizar" msm assim, msm sendo o msm número
         {
-            if (new_ != 0)
+            if (new_ != 0) // n sei pq 0, tvlz o usuário digitando 0 voltaria o atual?
                 return new_;
             else
                 return current;
         }
 
-        static string UpdateString(string new_,string current )
+        static string UpdateString(string new_,string current ) // que maneira esperta de voltar o atual irmão, parabéns,
+                                                                // eu tive problema com isso e n pensei como você,
+                                                                // mas tvlz seja um pouco errado, já que vai "atualizar" msm assim, msm sendo o msm nome
         {
             if (new_ != string.Empty)
                 return new_;
