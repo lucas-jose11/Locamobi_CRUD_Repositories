@@ -113,7 +113,17 @@ namespace Locamobi_CRUD_Repositories
                 de UserEntity, GetProperty pega a propriedade específica*/
                 if (property != null && property.CanWrite) //property.CanWrite: se a propriedade tem get e set e não apenas get(se pode ser alterável)
                 {
-                    property.SetValue(user, newValue);
+                    try
+                    {
+                        Type propType = property.PropertyType;
+
+                        object convertedValue = Convert.ChangeType(newValue, propType);
+                        property.SetValue(user, convertedValue);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($@"Erro ao converter valor para a propriedade {propertyName}: {ex.Message}");
+                    }
                 }
             }
         }

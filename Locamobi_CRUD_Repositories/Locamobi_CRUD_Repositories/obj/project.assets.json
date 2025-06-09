@@ -2364,10 +2364,6 @@
           {
             "name": "Microsoft.NETCore.App.Host.linux-x64",
             "version": "[7.0.20, 7.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.20, 7.0.20]"
           }
         ],
         "frameworkReferences": {
