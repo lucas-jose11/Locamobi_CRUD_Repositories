@@ -1,13 +1,8 @@
-﻿using System.Linq.Expressions; // os "using" que tiverem apagados pode deletar 
-using Google.Protobuf.WellKnownTypes;
+﻿
 using Locamobi_CRUD_Repositories.Contracts.Repository;
 using Locamobi_CRUD_Repositories.DTO;
 using Locamobi_CRUD_Repositories.Entity;
 using Locamobi_CRUD_Repositories.Repository;
-using Mysqlx.Crud;
-using Org.BouncyCastle.Asn1.Cmp;
-using ZstdSharp;
-
 namespace MeuPrimeiroCrud
 {
     public class Program
@@ -115,22 +110,24 @@ namespace MeuPrimeiroCrud
             }
         }
 
-         static string DeterminatorClassific(int option) // gostei do nome kkkkk
-         {
+        static string DeterminatorClassific(int option) 
+        {
 
-            if (option == 1) // já que é um validador de int, pode fazer switch case, assim será melhor por questão de memória
-                return "economico";
+            switch (option)
+            {
+                case 1:
+                    return "economico";
 
-            else if (option == 2)
-                return "intermediario";
+                case 2:
+                    return "intermediario";
 
+                case 3:
+                    return "premium";
 
-            else if (option == 3)
-                return "premium";
-
-            else
-                throw new ArgumentException($"Classificação não encontrada{option}"); // o else aq seria o default do switch case
-   
+                default:
+                throw new ArgumentException($"Classificação não encontrada{option}"); 
+                
+            }
          }
 
         static string DeterminatorTipo(int option2)
