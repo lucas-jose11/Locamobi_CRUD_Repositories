@@ -16,7 +16,7 @@ namespace MeuPrimeiroCrud
                     Console.WriteLine("Cadastro de Veiculo");
                     Console.WriteLine("Comandos \n");
                     Console.WriteLine("C - Create | R - Read | U - Update | D - Delete");
-                    char op = Convert.ToChar(Console.ReadLine()); // como está, só aceitará se for maiúsculo, para aceitar minúsculo, utilize o ToUpper() também
+                    char op = Convert.ToChar(Console.ReadLine().ToUpper());
 
                     switch (op)
                     {
@@ -91,7 +91,7 @@ namespace MeuPrimeiroCrud
                 int option2 = Convert.ToInt32(Console.ReadLine());
                 veiculoInsert.TIPO = DeterminatorTipo(option2);
 
-                Console.WriteLine("Infomre seu código unico ID"); // é bom especificar que é o código de usuário
+                Console.WriteLine("Infomre seu código de usuário unico ID"); 
                 veiculoInsert.USUARIO_CODUSER = Convert.ToInt32(Console.ReadLine());
 
                 IVeiculoRepository veiculoRepository = new VeiculoRepository();
@@ -132,21 +132,26 @@ namespace MeuPrimeiroCrud
 
         static string DeterminatorTipo(int option2)
         {
-            if (option2 == 1)  // aqui também poderia ser switch case, já que é apenas validação de valor
-                return "carro";
+            switch (option2)
+            {
+                case 1:
+                    return "carro";
 
-            else if (option2 == 2)
-                return "motocicleta";
+                case 2:
+                    return "motocicleta";
 
-            else
-                throw new ArgumentException($"Tipo não encontrada{option2}"); // aq seria o default do switch case
+                default:
+                    throw new ArgumentException($"Tipo não encontrada{option2}");
+                  
+            }
+         
         }
 
 
             
         static async Task Read()
         {
-            IVeiculoRepository veiculoRepository = new VeiculoRepository(); // de nenhuma forma reclamando, mas lembre que o professor disse que seria bom, tudo que não for interação com usuário, fosse em inglês
+            IVeiculoRepository veiculoRepository = new VeiculoRepository(); 
             IEnumerable<VeiculoEntity> veiculoList = await veiculoRepository.GetAll();
             foreach (VeiculoEntity veiculo in veiculoList)
             {
@@ -179,7 +184,7 @@ namespace MeuPrimeiroCrud
                 IVeiculoRepository veiculoRepository = new VeiculoRepository();
                 VeiculoEntity veiculoEntity = await veiculoRepository.GetByCodVeiculo(codVeic);
 
-                Console.WriteLine($"Informe o novo modelo:      |Enter para salvar {veiculoEntity.MODELO}|"); // falta o _________ que tem nos outros
+                Console.WriteLine($"Informe o novo modelo: _______ |Enter para salvar {veiculoEntity.MODELO}|"); 
                 string modelo = UpdateString(Console.ReadLine(), veiculoEntity.MODELO);
                 veiculoEntity.MODELO = modelo;
 
@@ -188,18 +193,18 @@ namespace MeuPrimeiroCrud
                 veiculoEntity.MARCA = marca;
 
                 Console.WriteLine($"Informe o novo ano: _______ |Enter para salvar {veiculoEntity.ANO}|");
-                int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
+                int ano = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.ANO); 
                 veiculoEntity.ANO = ano;
 
-                Console.WriteLine($"Infomre a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|"); // "Infomre"
+                Console.WriteLine($"Informe a nova placa: _______ |Enter para salvar {veiculoEntity.PLACA}|");
                 string placa = UpdateString(Console.ReadLine(), veiculoEntity.PLACA);
                 veiculoEntity.PLACA = placa;
 
-                Console.WriteLine($"Infomre a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|"); // "Infomre"
+                Console.WriteLine($"Informe a nova cor: _______ |Enter para salvar {veiculoEntity.COR}|");
                 string cor = UpdateString(Console.ReadLine(), veiculoEntity.COR);
                 veiculoEntity.COR = cor;
 
-                Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salvar {veiculoEntity.CIDADE_CODCID}|"); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
+                Console.WriteLine($"Informe o novo código do cidade: _______ |Enter para salvar {veiculoEntity.CIDADE_CODCID}|"); 
                 int cidadeCod = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.CIDADE_CODCID);
                 veiculoEntity.CIDADE_CODCID = cidadeCod;
 
@@ -212,20 +217,20 @@ namespace MeuPrimeiroCrud
                 string tipo = DeterminatorTipo(Convert.ToInt32(Console.ReadLine()));
                 veiculoEntity.TIPO = tipo;
 
-                Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salvar {veiculoEntity.USUARIO_CODUSER}|"); // JÁ QUE É INT, ELE NÃO DEIXA SER NULO, PRECISARIA SER STRING
+                Console.WriteLine($"Informe o novo código do usuário: _______ |Enter para salvar {veiculoEntity.USUARIO_CODUSER}|"); 
                 int usuarioCodigo = UpdateInt(Convert.ToInt32(Console.ReadLine()), veiculoEntity.USUARIO_CODUSER);
                 veiculoEntity.USUARIO_CODUSER = usuarioCodigo;
 
 
                 await veiculoRepository.Update(veiculoEntity);
 
-                Console.WriteLine("Veiculo cadastrado com sucesso!"); // ele foi alterado com sucesso*
+                Console.WriteLine("Veiculo alterado com sucesso!"); 
             }
 
             catch (FormatException)
             {
-                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VALIDO"); // nem sei se o professor vai pedir, mas erros de pontuação/gramaática tem aq e ali no código,
-                                                                             // mas eu n vou ser o chato de pontuar cada um, eu acharia isso mt irritante dependendo da situação se fosse feito cmg
+                Console.WriteLine("ERRO DE LEITURA INSIRA UM VALOR VÁLIDO"); 
+                                                                            
             }
 
             catch (Exception ex)
@@ -236,19 +241,15 @@ namespace MeuPrimeiroCrud
 
         }
 
-        static int UpdateInt(int new_, int current) // que maneira esperta de voltar o atual irmão, parabéns,
-                                                    // eu tive problema com isso e n pensei como você,
-                                                    // mas tvlz seja um pouco errado, já que vai "atualizar" msm assim, msm sendo o msm número
+        static int UpdateInt(int new_, int current) 
         {
-            if (new_ != 0) // n sei pq 0, tvlz o usuário digitando 0 voltaria o atual?
+            if (new_ != 0) 
                 return new_;
             else
                 return current;
         }
 
-        static string UpdateString(string new_,string current ) // que maneira esperta de voltar o atual irmão, parabéns,
-                                                                // eu tive problema com isso e n pensei como você,
-                                                                // mas tvlz seja um pouco errado, já que vai "atualizar" msm assim, msm sendo o msm nome
+        static string UpdateString(string new_,string current )
         {
             if (new_ != string.Empty)
                 return new_;

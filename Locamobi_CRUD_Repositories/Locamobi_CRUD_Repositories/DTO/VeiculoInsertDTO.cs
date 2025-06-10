@@ -2,9 +2,8 @@
 {
     public class VeiculoInsertDTO
     {
-        public int CODVEICULO { get; set; } // o DTO n tem CODVEICULO, já que o Update não vai trocar o id (CODVEICULO) dele,
-                                            // tvlz seja por isso a função do DTO, acessar apenas certas partes da Entidade, mas eu n tenho certeza absoluta
-        public string MODELO { get; set; } // seria só por convenção, mas no C# seria CodVeiculo, Modelo, Marca, etc...
+        public int CODVEICULO { get; set; }
+        public string MODELO { get; set; }
         public string MARCA { get; set; }
         public int ANO { get; set; }
         public string PLACA { get; set; }
